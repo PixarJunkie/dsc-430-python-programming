@@ -1,3 +1,5 @@
+#Kyle Chinn 10/10/2018 I have not given or received any unauthorized assistance on this assignment.  
+
 #Import modules 
 import random
 import sys
