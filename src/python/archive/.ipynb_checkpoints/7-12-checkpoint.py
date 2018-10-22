@@ -1,7 +1,5 @@
 #Kyle Chinn 10/10/2018 I have not given or received any unauthorized assistance on this assignment.  
 
-#NOTE: The professor gave me an extension on this homework since I was at a funeral for 5 days over the due date.
-
 #Import modules 
 import random
 import sys
@@ -18,12 +16,12 @@ def bet(amount):
     while amount > 1:
         #If player has < 1 exit program
         if amount < 1:
-            print("Sorry you don't have anything left to bet... exiting game")
+            print("Sorry you don't have anything left to bet...")
             print('')
             sys.exit(1)
         try:
             #Ask player for bet amount
-            bet_ = input('You currently have' + ' ' + '$' + str(amount) + '. ' + 'how much would you like to bet? Please only use integers: ')
+            bet_ = input('You currently have' + ' ' + '$' + str(amount) + '. ' + 'How much would you like to bet? Please only use integers: ')
             if int(bet_) not in bet_range: 
                 print('That is not an acceptable betting amount. How much would you like to bet?')
             #If bet is acceptable, pass it to bet_check()
@@ -37,34 +35,33 @@ def bet(amount):
 #Function for checking if bet is correct
 def bet_check(current_bet, current_amount):
     while True:
-        bet_check = input('You bet' + ' ' + '$' + str(current_bet) + ' ' + 'is that correct?(yes or no): ')
+        bet_check = input('You bet' + ' ' + '$' + str(current_bet) + ' ' + 'is that correct?(yes or no)')
         if bet_check.lower() not in yes_no:
-            print('Please input yes or no only. You bet' + ' ' + '$' + str(current_bet) + ' ' + 'is that correct?(yes or no): ')
+            print('Please input yes or no only. You bet' + ' ' + '$' + str(current_bet) + ' ' + 'is that correct?(yes or no)')
         #If no send player back to bet()
         elif bet_check.lower() == 'no':
             bet(current_amount)
         #If yes call dice_roll() for the set bet amount
         elif bet_check.lower() == 'yes':
             dice_roll(current_bet, current_amount)
-            return None
 
 #Function for checking if player would like to continue
 def keep_playing(amount):
     amount = amount
     while True:
-        keep_playing = input('Would you like to keep playing?(yes or no): ')
+        keep_playing = input('Would you like to keep playing?(yes or no)')
         if keep_playing.lower() not in yes_no:
             print('Please input yes or no only...')
         #if no then print final amount and exit program
         elif keep_playing.lower() == 'no':
             print('')
-            print('You ended with' + ' ' + '$' + str(amount) + '. Thanks for playing!')
-            sys.exit(1)
+            print('You ended with' + ' ' + + '$' + str(amount) + '. Thanks for playing!')
+            sys.exit()
         #if yes, call bet() with new amount
         elif keep_playing.lower() == 'yes':
             print('')
             bet(amount)
-            return None
+            return amount
         
 #Dice roll function
 def dice_roll(current_bet, amount):
@@ -85,18 +82,19 @@ def dice_roll(current_bet, amount):
         keep_playing(current_amount)
     #Check if player has any money left. If not, end the game
     if (current_amount - current_bet) < 1:
-        print("Sorry you don't have anything left to bet... exiting game")
+        print("Sorry you don't have anything left to bet...")
         print('')
         sys.exit(1)
     #Double up with third roll
     while True:
-        third_roll = input("Sorry, you didn't win, would you like to double your bet and roll a third die?(yes or no): ")
+        third_roll = input("Sorry, you didn't win, would you like to double your bet and roll a third die?(yes or no)")
         #Check if doubling up would make player go under
         if (current_bet * 2) > current_amount and third_roll.lower() == 'yes':
-            current_amount -= current_bet
             print('')
-            print("Sorry you don't have enough money to bet that, you lost" + ' ' + '$' + str(current_bet) + '.' + ' ' + 'leaving you with' + ' ' + '$' + str(current_amount) + '.')
-            keep_playing(current_amount)
+            print("Sorry you don't have enough money to bet that, you lost" + ' ' + '$' + str(current_bet) + '.')
+            current_amount -= current_bet
+            bet(current_amount)
+            return current_amount
         #Only allow yes and no
         if third_roll.lower() not in yes_no: 
             print('Please input yes or no only...')
@@ -106,6 +104,7 @@ def dice_roll(current_bet, amount):
             print('')
             print('You have' + ' ' + '$' + str(current_amount) + ' ' + 'left.')
             keep_playing(current_amount)
+            return current_amount
         #If yes, add third dice roll to tot_roll
         elif third_roll.lower() == 'yes':
             tot_roll += dice_3
@@ -117,19 +116,14 @@ def dice_roll(current_bet, amount):
             print('Congratulations, you won! Your total amount is now' + ' ' + '$' + str(current_amount))
             print('')
             keep_playing(current_amount)
+            return current_amount
         #If not 7 or 12, subtract bet * 2 from current amount and prompt keep_playing()
         else:
             current_amount -= current_bet * 2
-            if (current_amount - current_bet) < 1:
-                print("Sorry you didn't win this time, you lost" + ' ' + '$' + str(current_bet * 2) + ' ' + 'leaving you with' + ' ' + '$' + str(current_amount) + '.')
-                print("Sorry you don't have anything left to bet... exiting game")
-                print('')
-                sys.exit(1)
-            else:
-                print("Sorry you didn't win this time, you lost" + ' ' + '$' + str(current_bet * 2) + ' ' + 'leaving you with' + ' ' + '$' + str(current_amount) + '.')
-                print('')
-                keep_playing(current_amount)
-                return None
+            print("Sorry you didn't win this time, you lost" + ' ' + '$' + str(current_bet * 2) + ' ' + 'leaving you with' + ' ' + '$' + str(current_amount) + '.')
+            print('')
+            keep_playing(current_amount)
+            return current_amount
 
 #Function for starting the game
 def game():
@@ -155,6 +149,5 @@ you win. Other than that, you will lose the amount bet.
             break
 
     bet(starting_amount)
-    return None
     
 game()

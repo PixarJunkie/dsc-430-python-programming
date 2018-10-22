@@ -1,5 +1,7 @@
 #Kyle Chinn 10/10/2018 I have not given or received any unauthorized assistance on this assignment.
 
+#NOTE: The professor gave me an extension on this homework since I was at a funeral for 5 days over the due date.
+
 import pandas as pd
 import subprocess
 import sys

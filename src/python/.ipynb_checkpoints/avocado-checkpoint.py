@@ -1,5 +1,7 @@
 #Kyle Chinn 10/13/2018 I have not given or received any unauthorized assistance on this assignment.
 
+#NOTE: The professor gave me an extension on this homework since I was at a funeral for 5 days over the due date.
+
 #Import packages
 import pandas as pd
 import statistics as stats
@@ -7,10 +9,13 @@ import csv
 import sys
 from math import sqrt
 
+print('This program requires that "avocado.csv" exists in the directory which you are running "avocado.py" from')
+
 #Set "gloabal" variables
 yes_no = ['yes', 'no']
 stat_list = ['mean', 'median', 'sd', 'hmean', 'hmedian', 'hsd']
-file_path = r'/Users/abbychinn/Desktop/KB/dsc-430-python-programming/data/avocado.csv'
+#file_path = r'/Users/Luxo_Jr/Desktop/School/Fall 2018/dsc-430-python-programming/data/avocado.csv'
+file_path = r'avocado.csv'
 special_columns = ['date', 'year', 'type', 'region']
 
 #Function for continuing 
@@ -133,7 +138,7 @@ def column_select():
         #Lowercase all strings 
         column_labels = [x.lower() for x in column_labels]
         #Print available columns for user selection
-        print('\033[1m' + """Columns""" + '\033[1m')
+        print("""Columns""")
         #Print without ',' or list brackets
         print('\n'.join(column_labels))
     while True:
@@ -169,11 +174,11 @@ def column_select():
 5. homegrown median (hmedian)
 6. homegrown standard deviation (hsd)
 
-Please only input mean, median, sd, hmean, hmedian, or hsd only.""")
+Please only input mean, median, sd, hmean, hmedian, or hsd only: """)
                         #Check for appropriate input
                         if stat_select not in stat_list:
                             print('')
-                            print('Please input mean, median, sd, hmean, hmedian, or hsd only')
+                            print('Please input mean, median, sd, hmean, hmedian, or hsd only: ')
                         #If input is correct, pass stat_select, data, and column_name to the stat function
                         elif stat_select in stat_list:
                             stat(stat_select, data, column_name)
