@@ -43,8 +43,8 @@ def stem(num):
     #Fill the dictionary
     for line in list_:
         #Set key, value from list_
-        key = line[0]
-        value = line[1]
+        key = ''.join(line[:len(line) - 1])
+        value = line[-1]
         #If key doesn't exist yet, create it, and assign empty list for it's values
         if key not in dict:
             dict[key] = []

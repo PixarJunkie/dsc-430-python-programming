@@ -129,6 +129,14 @@ def stat(stat_selection, data, column_title):
 
 #Main function
 def column_select():
+    
+    memory = input('Would you like to compute statics as memoryless?(yes or no): ')
+    if memory_.lower() not in yes_no:
+        print('Please input yes or no only')
+    elif memory.lower() == 'no':
+        continue
+    elif memory.lower() == 'yes':
+        memory_less()
      
     #Get column titles
     with open (file_path) as file:
